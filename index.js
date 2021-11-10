@@ -39,13 +39,33 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-  
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
 
+Person.prototype.eat = function(foodItem) {
+//stomach.push('someFood') into stomach array
+//conditional- if stomach array has 10 items, no push
+//return stomach;
+if(this.stomach.length < 10) {
+  this.stomach.push(foodItem);
+ } 
+ return this.stomach;
+ }
 
+Person.prototype.poop = function() {
+//stomach.splice(0, stomach.length);
+//return stomach;
+this.stomach.splice(0, this.stomach.length);
+return this.stomach;
+}
 
-
+Person.prototype.toString = function() {
+//return `My name is ${this.name} and my age is ${this.age}.`
+return `My name is ${this.name} and my age is ${this.age}.`;
+}
 
 
 
@@ -63,8 +83,25 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-  
+function Car(model, milesPerGallon) {
+  this.tank = 0;
+  this.odometer = 0;
+}
+
+Car.prototype.fill = function(gallons) {
+  //let tankSum = gallons + this.tank;
+  //return tankSum;
+}
+
+//Stretch
+Car.prototype.drive = function(distance) {
+  //let odoSum = distance + this.odometer;
+  //let tankDrain = distance / milesPerGallon;
+  //while loop? while distance > 0, return odo sum && tankDrain; 
+}
+
+Car.prototype.walk = function() {
+  //if this.tank = 0, then return `I ran out of fuel at ${this.odometer} miles!`
 }
 
 
@@ -75,10 +112,16 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
- 
+function Baby(name, age, favoriteToy) {
+  Person.call(this, name, age)
+  this.favoriteToy = favoriteToy;
 }
 
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function() {
+  return `Playing with ${this.favoriteToy}`;
+}
 
 /* 
   TASK 4
